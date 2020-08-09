@@ -6,10 +6,17 @@
     margin-top: 10%;
 }
 
-#quiz {
+#quizpage {
     margin-top: 10%;
+    display: none;
 }
 
 #highscorepage {
     margin-top: 10%;
+    display: none;
+}
+
+#currentscorepage {
+    margin-top: 10%;
+    display: none;
 }

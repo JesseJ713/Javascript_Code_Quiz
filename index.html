@@ -10,26 +10,40 @@
 </head>
 <body>
     <!-- Landing page -->
-    <!-- <div id="homepage" class="jumbotron text-center">
+    <div id="homepage" class="jumbotron text-center">
         <h1 class="display-4">JavaScript Fundamentals Quiz</h1>
         <hr class="my-4">
         <h1>Test your knowledge with this simple quiz</h1>
             <button id="startquiz" class="btn btn-primary btn-lg m-3" type="submit">Test Me!</button>
             <button id="showscore" class="btn btn-primary btn-lg m-3" type="submit">High Scores</button>
-    </div> -->
+    </div>
 
     <!-- Question Panels -->
-    <!-- <div id="quizpage" class="jumbotron text-center">
+    <div id="quizpage" class="jumbotron text-center">
         <h1 id="question" class="display-4">Placeholder Question</h1>
         <h1 id="timer" class="pt-3">Timer?</h1>
         <hr class="my-4">
             <div id="multiplechoice" class="btn-group-vertical">
-                <button id="a" class="btn btn-primary btn-lg m-2" type="submit">Placeholder Answer</button>
-                <button id="b" class="btn btn-primary btn-lg m-2" type="submit">Placeholder Answer</button>
-                <button id="c" class="btn btn-primary btn-lg m-2" type="submit">Placeholder Answer</button>
-                <button id="d" class="btn btn-primary btn-lg m-2" type="submit">Placeholder Answer</button>
+                <button id="a" class="btn btn-primary btn-lg m-2" type="submit">A</button>
+                <button id="b" class="btn btn-primary btn-lg m-2" type="submit">B</button>
+                <button id="c" class="btn btn-primary btn-lg m-2" type="submit">C</button>
+                <button id="d" class="btn btn-primary btn-lg m-2" type="submit">D</button>
             </div>
-    </div> -->
+    </div>
+
+    <!-- End of quiz score presentation and name entry -->
+        <div id="currentscorepage" class="jumbotron text-center">
+        <h1 id="currentscoredisplay" class="display-4">Your Score!</h1>
+        <hr class="my-4">
+        <form class="form-inline justify-content-center">
+            <div class="form-group mx-sm-3 mb-2">
+              <!-- <label for="inputPassword2" class="sr-only">Password</label> -->
+              <input type="text" id="initials" class="form-control" placeholder="Initials">
+            </div>
+            <button id="submitscorebtn" type="submit" class="btn btn-primary mb-2">Submit</button>
+          </form>
+       </div>
+
 
     <!-- High Scores -->
     <div id="highscorepage" class="jumbotron text-center">

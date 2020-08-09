@@ -6,6 +6,9 @@ var quizPage = document.getElementById("quizpage");
 var question = document.getElementById("question");
 var multipleChoice = document.getElementById("multiplechoice");
 var timer = document.getElementById("timer");
+var currentScorePage = document.getElementById("currentscorepage");
+var currentScoreDisplay = document.getElementById("currentscoredisplay");
+var submitScoreBtn = document.getElementById("submitscorebtn");
 var highScorePage = document.getElementById("highscorepage");
 var highScoreList = document.getElementById("highscorelist");
 var highScoreInitial = document.getElementById("highscoreinitial");
@@ -28,7 +31,7 @@ var quizQuestions = [{
     choiceB: "<script>",
     choiceC: "<scripted>",
     choiceD: "<js>",
-    correctAnswer: "B",
+    correctAnswer: "B"
 },
 {
     question: "What is the correct syntax for referring to an external script called “script.js”?",
@@ -36,7 +39,7 @@ var quizQuestions = [{
     choiceB: "<script href=”script.js”>",
     choiceC: "<script ref=”script.js”>",
     choiceD: "<script name=”script.js”>",
-    correctAnswer: "A",
+    correctAnswer: "A"
 },
 {
     question: "When a user views a page containing a JavaScript program, which machine actually executes the script?",
@@ -44,7 +47,7 @@ var quizQuestions = [{
     choiceB: "The Web server",
     choiceC: "JavaScript is not executed by a machine but rather through signals",
     choiceD: "The User's machine running a Web browser",
-    correctAnswer: "D",
+    correctAnswer: "D"
 },
 {
     question: " Which of the following best describes JavaScript?",
@@ -52,7 +55,7 @@ var quizQuestions = [{
     choiceB: "A low-level programming language",
     choiceC: "An object-oriented scripting language",
     choiceD: "A scripting language precompiled in the browser",
-    correctAnswer: "C",
+    correctAnswer: "C"
 },
 {
     question: "Which of the following is not a valid JavaScript variable name?",
@@ -60,7 +63,7 @@ var quizQuestions = [{
     choiceB: " _first_and_last_names",
     choiceC: "2names",
     choiceD: "None of the above",
-    correctAnswer: "C",
+    correctAnswer: "C"
 }];
 
 var finalQuestion = quizQuestions.length;
@@ -68,24 +71,63 @@ var finalQuestion = quizQuestions.length;
 
 // Starting the quiz
 function quizStart() {
-homePage.style.display = "none";
-cycleQuestions();
+    homePage.style.display = "none";
+    quizPage.style.display = "block";
+    currentScorePage.style.display = "none";
+    highScorePage.style.display = "none";
+    cycleQuestions();
 
-timerInt = setInterval(() => {
-    totalTime--;
-    timer.textContent = totalTime;
+    timerInt = setInterval(() => {
+        totalTime--;
+        timer.textContent = totalTime;
 
     if (totalTime == 0) {
         clearInterval(timerInt);
-        highScores();
+        submitScore();
     }
 }, 1000);
 }
 
+// Displaying score when the user completes the quiz or timer runs out
+function submitScore() {
+    currentScorePage.style.display = "block";
+    homePage.style.display = "none";
+    quizPage.style.display = "none";
+    highScorePage.style.display = "none"
+    clearInterval(timerInt);
+    highScoreInitial.value = "";
+    currentScoreDisplay.textContent = "Your score is " + score;
+}
+
+// Submitting score to local storage
+submitScoreBtn.addEventListener("click", function () {
+    if (highScoreInitial.value === "") {
+        return false;
+    } else {
+        var domHighScores = JSON.parse(localStorage.getItem("domHighScores")) || [];
+        var currentUser = highScoreInitial.value.trim();
+        var currentHighScore = {
+            name: currentUser,
+            score: score
+        };
+    }
+    currentScorePage.style.display = "none";
+    homePage.style.display = "none";
+    quizPage.style.display = "none";
+    highScorePage.style.display = "block";
+    domHighScores.push(currentHighScore);
+    localStorage.setItem("domHighScores", JSON.stringify(domHighScores));
+    highScores();
+});
+
 // Function that parses the object array for the questions
 function cycleQuestions() {
+    quizPage.style.display = "block";
+    homePage.style.display = "none";
+    currentScorePage.style.display = "none";
+    highScorePage.style.display = "none";
     if (questionsArrayIndex === finalQuestion) {
-        highScores();
+        submitScore();
     }
     var activeQuestion = quizQuestions[questionsArrayIndex];
     question.innerHTML = activeQuestion.question;
@@ -96,12 +138,40 @@ function cycleQuestions() {
 }
 
 // Checking the answer to progress to next question
-function answerCheck() {
+function answerCheck(answer) {
+    correct = quizQuestions[questionsArrayIndex].correctAnswer;
+    if (answer === correct && questionsArrayIndex !== finalQuestion) {
+        score++;
+        questionsArrayIndex++;
+        alert("CORRECT!");
+        cycleQuestions();
+    } else if (answer !== correct && questionsArrayIndex !== finalQuestion) {
+        questionsArrayIndex++;
+        alert("INCORRECT!");
+        cycleQuestions();
+    } else {
+        submitScore();
+    }
 }
 
 // End game to show score
-function highScores () {
+function highScores() {
+    quizPage.style.display = "none";
+    homePage.style.display = "none";
+    currentScorePage.style.display = "none";
+    highScorePage.style.display = "block";
 
+    highScoreInitial.innerHTML = "";
+    highScoreBadge.innerHTML = "";
+    var highScores = JSON.parse(localStorage.getItem("domHighScores")) || [];
+    for (i=0; i < highScores.length; i++) {
+        var newName = document.createElement("li");
+        var newScore = document.createElement("span");
+        newName.textContent = highScores[i].name;
+        newScore.textContent = highScores[i].score;
+        highScoreInitial.appendChild(newName);
+        highScoreBadge.appendChild(newScore);
+    }
 }
 
 startQuizBtn.addEventListener("click", quizStart);
