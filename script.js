@@ -2,15 +2,23 @@
 var homePage = document.getElementById("homepage");
 var startQuizBtn = document.getElementById("startquiz");
 var showScoreBtn = document.getElementById("showscore");
-var quiz = document.getElementById("quiz");
+var quizPage = document.getElementById("quizpage");
 var question = document.getElementById("question");
 var multipleChoice = document.getElementById("multiplechoice");
 var timer = document.getElementById("timer");
+var highScorePage = document.getElementById("highscorepage");
+var highScoreList = document.getElementById("highscorelist");
+var highScoreInitial = document.getElementById("highscoreinitial");
+var highScoreBadge = document.getElementById("highscorebadge");
 var buttonA = document.getElementById("a");
 var buttonB = document.getElementById("b");
 var buttonC = document.getElementById("c");
 var buttonD = document.getElementById("d");
 var questionsArrayIndex = 0;
+var totalTime = 100;
+var timerInt; 
+var score = 0;
+var correct;
 
 // Multiple Choice Questions
 
@@ -55,4 +63,45 @@ var quizQuestions = [{
     correctAnswer: "C",
 }];
 
+var finalQuestion = quizQuestions.length;
 
+
+// Starting the quiz
+function quizStart() {
+homePage.style.display = "none";
+cycleQuestions();
+
+timerInt = setInterval(() => {
+    totalTime--;
+    timer.textContent = totalTime;
+
+    if (totalTime == 0) {
+        clearInterval(timerInt);
+        highScores();
+    }
+}, 1000);
+}
+
+// Function that parses the object array for the questions
+function cycleQuestions() {
+    if (questionsArrayIndex === finalQuestion) {
+        highScores();
+    }
+    var activeQuestion = quizQuestions[questionsArrayIndex];
+    question.innerHTML = activeQuestion.question;
+    buttonA.textContent = activeQuestion.choiceA;
+    buttonB.textContent = activeQuestion.choiceB;
+    buttonC.textContent = activeQuestion.choiceC;
+    buttonD.textContent = activeQuestion.choiceD;
+}
+
+// Checking the answer to progress to next question
+function answerCheck() {
+}
+
+// End game to show score
+function highScores () {
+
+}
+
+startQuizBtn.addEventListener("click", quizStart);
