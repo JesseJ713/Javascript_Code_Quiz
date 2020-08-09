@@ -68,7 +68,6 @@ var quizQuestions = [{
 
 var finalQuestion = quizQuestions.length;
 
-
 // Starting the quiz
 function quizStart() {
     homePage.style.display = "none";
@@ -140,12 +139,13 @@ function cycleQuestions() {
 // Checking the answer to progress to next question
 function answerCheck(answer) {
     correct = quizQuestions[questionsArrayIndex].correctAnswer;
-    if (answer === correct && questionsArrayIndex !== finalQuestion) {
+    let correctAnswerText = quizQuestions[questionsArrayIndex][`choice${correct}`];
+    if (answer === correctAnswerText && questionsArrayIndex !== finalQuestion) {
         score++;
         questionsArrayIndex++;
         alert("CORRECT!");
         cycleQuestions();
-    } else if (answer !== correct && questionsArrayIndex !== finalQuestion) {
+    } else if (answer !== correctAnswerText && questionsArrayIndex !== finalQuestion) {
         questionsArrayIndex++;
         alert("INCORRECT!");
         cycleQuestions();
@@ -175,3 +175,20 @@ function highScores() {
 }
 
 startQuizBtn.addEventListener("click", quizStart);
+
+buttonA.addEventListener("click", function(event) {
+    event.preventDefault();
+    answerCheck(event.target.textContent)
+})
+buttonB.addEventListener("click", function(event) {
+    event.preventDefault();
+    answerCheck(event.target.textContent)
+})
+buttonC.addEventListener("click", function(event) {
+    event.preventDefault();
+    answerCheck(event.target.textContent)
+})
+buttonD.addEventListener("click", function(event) {
+    event.preventDefault();
+    answerCheck(event.target.textContent)
+})
