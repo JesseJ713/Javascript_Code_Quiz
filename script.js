@@ -96,24 +96,26 @@ function submitScore() {
     clearInterval(timerInt);
     highScoreInitial.value = "";
     currentScoreDisplay.textContent = "Your score is " + score;
-}
+    };
 
 // Submitting score to local storage
-submitScoreBtn.addEventListener("click", function () {
+submitScoreBtn.addEventListener("click", function (event) {
+    event.preventDefault();
     if (highScoreInitial.value === "") {
-        return false;
+        return alert("Please enter your initials");
     } else {
         var domHighScores = JSON.parse(localStorage.getItem("domHighScores")) || [];
-        var currentUser = highScoreInitial.value.trim();
+        var currentUser = highScoreInitial.value;
         var currentHighScore = {
             name: currentUser,
-            score: score
+            score: score,
         };
     }
-    currentScorePage.style.display = "none";
-    homePage.style.display = "none";
-    quizPage.style.display = "none";
-    highScorePage.style.display = "block";
+
+    // currentScorePage.style.display = "none";
+    // homePage.style.display = "none";
+    // quizPage.style.display = "none";
+    // highScorePage.style.display = "block";
     domHighScores.push(currentHighScore);
     localStorage.setItem("domHighScores", JSON.stringify(domHighScores));
     highScores();
@@ -129,7 +131,7 @@ function cycleQuestions() {
         submitScore();
     }
     var activeQuestion = quizQuestions[questionsArrayIndex];
-    question.innerHTML = activeQuestion.question;
+    question.textContent = activeQuestion.question;
     buttonA.textContent = activeQuestion.choiceA;
     buttonB.textContent = activeQuestion.choiceB;
     buttonC.textContent = activeQuestion.choiceC;
@@ -171,6 +173,8 @@ function highScores() {
         newScore.textContent = highScores[i].score;
         highScoreInitial.appendChild(newName);
         highScoreBadge.appendChild(newScore);
+        // console.log(newName);
+        // console.log(newScore);
     }
 }
 
@@ -191,4 +195,8 @@ buttonC.addEventListener("click", function(event) {
 buttonD.addEventListener("click", function(event) {
     event.preventDefault();
     answerCheck(event.target.textContent)
+})
+submitScoreBtn.addEventListener("click", function(event) {
+    event.preventDefault();
+    highScores();
 })

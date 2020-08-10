@@ -20,3 +20,5 @@ I've built the homepage which includes buttons for the user to either start the 
 Functionality is all over the place. Going to have that as my main focus since I believe the template is set for fine-tuning. Getting the separate pieces to interact with each other have been the hardest part. Thankfully, with this practice I have grown a little more comfortable with the DOM.
 
 Had a quick tutoring session where they pointed out my button functionality. I've now set the answers to be globally listened by clicks and they seem to be functioning properly now!
+
+Struggling with displaying high scores and having the values stored in the local storage properly. This will be my main focus going forward.
