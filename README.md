@@ -1,8 +1,8 @@
 # Javascript_Code_Quiz
 
-(INSERT URL HERE)
+https://jessej713.github.io/Javascript_Code_Quiz/
 
-![JavaScript Code Quiz Screenshot](/INSERT-PATHWAY-HERE.PNG?raw=true "JavaScript Code Quiz")
+![JavaScript Code Quiz Screenshot](/JavaScript_Quiz.PNG?raw=true "JavaScript Code Quiz")
 
 ## Description
 This program will allow users to take a JavaScript related quiz to test their knowledge! The program will include, but not limited to:
@@ -22,3 +22,5 @@ Functionality is all over the place. Going to have that as my main focus since I
 Had a quick tutoring session where they pointed out my button functionality. I've now set the answers to be globally listened by clicks and they seem to be functioning properly now!
 
 Struggling with displaying high scores and having the values stored in the local storage properly. This will be my main focus going forward.
+
+Finally able to reach into local storage and display information regarding users and their high scores, but having troubles displaying them in a stylish manner. I believe it has to do with the appending children structure. I will reach out for help on this manner. Happy to make a little bit of progress on my own though!

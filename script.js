@@ -8,6 +8,7 @@ var multipleChoice = document.getElementById("multiplechoice");
 var timer = document.getElementById("timer");
 var currentScorePage = document.getElementById("currentscorepage");
 var currentScoreDisplay = document.getElementById("currentscoredisplay");
+var inputInitials = document.getElementById("initials");
 var submitScoreBtn = document.getElementById("submitscorebtn");
 var highScorePage = document.getElementById("highscorepage");
 var highScoreList = document.getElementById("highscorelist");
@@ -94,18 +95,18 @@ function submitScore() {
     quizPage.style.display = "none";
     highScorePage.style.display = "none"
     clearInterval(timerInt);
-    highScoreInitial.value = "";
+    inputInitials.value = "";
     currentScoreDisplay.textContent = "Your score is " + score;
     };
 
 // Submitting score to local storage
 submitScoreBtn.addEventListener("click", function (event) {
     event.preventDefault();
-    if (highScoreInitial.value === "") {
+    if (inputInitials.value === "") {
         return alert("Please enter your initials");
     } else {
         var domHighScores = JSON.parse(localStorage.getItem("domHighScores")) || [];
-        var currentUser = highScoreInitial.value;
+        var currentUser = inputInitials.value;
         var currentHighScore = {
             name: currentUser,
             score: score,
@@ -169,12 +170,16 @@ function highScores() {
     for (i=0; i < highScores.length; i++) {
         var newName = document.createElement("li");
         var newScore = document.createElement("span");
+        newName.setAttribute("class", "list-group-item justify-content-between align-items-center" )
+        newScore.setAttribute("class", "badge badge-primary badge-pill")
+        newName.setAttribute("id", "highscoreinitial");
+        newScore.setAttribute("id", "highscorebadge");
         newName.textContent = highScores[i].name;
         newScore.textContent = highScores[i].score;
-        highScoreInitial.appendChild(newName);
-        highScoreBadge.appendChild(newScore);
-        // console.log(newName);
-        // console.log(newScore);
+        highScoreInitial.append(newName);
+        highScoreInitial.appendChild(newScore);
+        console.log(newName);
+        console.log(newScore);
     }
 }
 
@@ -197,6 +202,10 @@ buttonD.addEventListener("click", function(event) {
     answerCheck(event.target.textContent)
 })
 submitScoreBtn.addEventListener("click", function(event) {
+    event.preventDefault();
+    highScores();
+})
+showScoreBtn.addEventListener("click", function(event) {
     event.preventDefault();
     highScores();
 })
