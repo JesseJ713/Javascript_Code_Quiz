@@ -26,3 +26,7 @@ Struggling with displaying high scores and having the values stored in the local
 Finally able to reach into local storage and display information regarding users and their high scores, but having troubles displaying them in a stylish manner. I believe it has to do with the appending children structure. I will reach out for help on this manner. Happy to make a little bit of progress on my own though!
 
 Reached out to tutor who was also stumped as to why styling wasn't displaying properly for high score. Will have to review this piece of code once I'm more knowledgeable of the subject.
+
+## Known Bugs
+
+High Score page does not reflect high scores in a correct stylish manner. Values are represented, but not organized correctly. This bug is being addressed with future updates.
