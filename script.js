@@ -14,6 +14,7 @@ var highScorePage = document.getElementById("highscorepage");
 var highScoreList = document.getElementById("highscorelist");
 var highScoreInitial = document.getElementById("highscoreinitial");
 var highScoreBadge = document.getElementById("highscorebadge");
+var tryAgainBtn = document.getElementById("tryagainbtn");
 var buttonA = document.getElementById("a");
 var buttonB = document.getElementById("b");
 var buttonC = document.getElementById("c");
@@ -176,7 +177,7 @@ function highScores() {
         newScore.setAttribute("id", "highscorebadge");
         newName.textContent = highScores[i].name;
         newScore.textContent = highScores[i].score;
-        highScoreInitial.append(newName);
+        highScoreList.appendChild(newName);
         highScoreInitial.appendChild(newScore);
         console.log(newName);
         console.log(newScore);
@@ -208,4 +209,9 @@ submitScoreBtn.addEventListener("click", function(event) {
 showScoreBtn.addEventListener("click", function(event) {
     event.preventDefault();
     highScores();
+})
+
+tryAgainBtn.addEventListener("click", function(event){
+    event.preventDefault();
+    quizStart();
 })
