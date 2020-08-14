@@ -114,10 +114,6 @@ submitScoreBtn.addEventListener("click", function (event) {
         };
     }
 
-    // currentScorePage.style.display = "none";
-    // homePage.style.display = "none";
-    // quizPage.style.display = "none";
-    // highScorePage.style.display = "block";
     domHighScores.push(currentHighScore);
     localStorage.setItem("domHighScores", JSON.stringify(domHighScores));
     highScores();
